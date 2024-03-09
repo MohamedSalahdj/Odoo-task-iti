@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_department_tree" model="ir.ui.view">
+            <field name="name">hms.department.tree</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="is_opened"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_department_form" model="ir.ui.view">
+            <field name="name">hms.department.form</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="capacity"/>
+                            <field name="is_opened"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_department_tree" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.department</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="action_department_form" model="ir.actions.act_window">
+            <field name="name">Department</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.department</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_department" name="Departments"/>
+        <menuitem id="menu_department_tree" name="Department List" parent="menu_department" action="action_department_tree"/>
+        <menuitem id="menu_department_form" name="Create Department" parent="menu_department" action="action_department_form"/>
+    </data>
+</odoo>
+
+
+
+

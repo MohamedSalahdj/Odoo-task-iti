@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="view_doctor_tree" model="ir.ui.view">
+            <field name="name">hms.doctor.tree</field>
+            <field name="model">hms.doctor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="image" widget="image" style="max-width: 50px; max-height: 50px;"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_doctor_form" model="ir.ui.view">
+            <field name="name">hms.doctor.form</field>
+            <field name="model">hms.doctor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="image" widget="image" style="max-width: 50px; max-height: 50px;"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_doctor_tree" model="ir.actions.act_window">
+            <field name="name">Doctors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.doctor</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="action_doctor_form" model="ir.actions.act_window">
+            <field name="name">Doctor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.doctor</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_doctor" name="Doctors"/>
+        <menuitem id="menu_doctor_tree" name="Doctor List" parent="menu_doctor" action="action_doctor_tree"/>
+        <menuitem id="menu_doctor_form" name="Create Doctor" parent="menu_doctor" action="action_doctor_form"/>
+    </data>
+</odoo>
