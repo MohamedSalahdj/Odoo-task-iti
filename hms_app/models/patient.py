@@ -8,7 +8,7 @@ class Patient(models.Model):
     first_name = fields.Char(required=True)
     last_name = fields.Char(required=True)
     birth_date = fields.Date()
-    history = fields.Html()
+    history = fields.Html(string='History', invisible=True)
     cr_ratio = fields.Float()
     blood_type = fields.Selection([
         ('A+', 'A+'),
@@ -34,12 +34,26 @@ class Patient(models.Model):
         ('serious', 'Serious')
     ])
     email = fields.Char(string='Email', required=True, unique=True)
+    history_ids = fields.One2many('hms.patient.history', 'patient_id', string='History')
+
+    @api.onchange('department_id')
+    def _onchange_department_id(self):
+        if self.department_id and not self.department_id.is_opened:
+            self.department_id = False
+            return {'warning': {'title': 'Closed Department', 'message': 'You cannot select a closed department.'}}
+
+    def write(self, vals):
+        if 'state' in vals:
+            description = f'State changed to {vals["state"].capitalize()}'
+            self.history_ids.create({'created_by': self.env.user.id, 'description': description})
+        return super(Patient, self).write(vals)
 
     @api.constrains('pcr')
     def _check_cr_ratio(self):
         for patient in self:
             if patient.pcr and not patient.cr_ratio:
                 raise ValidationError("CR Ratio field is mandatory when PCR is checked.")
+
     @api.depends('age')
     def _compute_history_visibility(self):
         for patient in self:
@@ -75,5 +89,11 @@ class Patient(models.Model):
                 patient.age = False
 
 
+class PatientHistory(models.Model):
+    _name = 'hms.patient.history'
+    _description = 'Patient History'
 
-
+    patient_id = fields.Many2one('hms.patient', string='Patient')
+    created_by = fields.Char(default=lambda self: self.env.user.name)
+    date = fields.Date(default=fields.Date.today)
+    description = fields.Text(string='Description')

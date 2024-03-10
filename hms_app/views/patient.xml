@@ -31,19 +31,17 @@
                             <field name="department_capacity"/>
                             <field name="doctor_ids"/>
                         </group>
-                        <notebook>
-                            <page string="Medical Details">
-                                <field name="history" widget="html"/>
-                                <field name="cr_ratio"/>
-                                <field name="pcr"/>
-                            </page>
-                            <page string="Contact Details">
-                                <field name="address"/>
-                            </page>
-                            <page string="Image">
-                                <field name="image" widget="image"/>
-                            </page>
-                        </notebook>
+                      <notebook>
+                        <page str="Log History">
+                            <field name="line_ids">
+                                <tree>
+                                    <field name="created_by"/>
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                     </sheet>
                 </form>
             </field>
