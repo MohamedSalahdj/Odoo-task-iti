@@ -23,11 +23,11 @@
                             <group string="General info.">
                                 <field name="name"/>
                                 <field name="description"/>
+                                <field name="state"/>
                             </group>
                             <group string="Additional Info.">
                                 <field name="number"/>
                                 <field name="tag"/>
-                                <field name="state"/>
                                 <field name="file"/>
                         </group>
                         </group>
