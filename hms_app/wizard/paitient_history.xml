@@ -1,0 +1,25 @@
+<odoo>
+    <record id="patient_history_wizard_view" model="ir.ui.view">
+        <field name="name">patient.history.wizard.view</field>
+        <field name="model">patient.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <group class="oe_title">
+                    <field name="patient_id"/>
+                    <field name="current_date"/>
+                    <field name="description"/>
+                </group>
+
+            </form>
+        </field>
+
+    </record>
+
+    <record id="patient_history_wizard_action" model="ir.actions.act_window">
+        <field name="name">Add History</field>
+        <field name="res_model">patient.history</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hms_app.patient_history_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -14,5 +14,6 @@
         'views/doctor.xml',
         'views/patient.xml',
         'views/department.xml'
+        'wizard/paitient_history.xml'
     ],
 }

@@ -1,5 +1,4 @@
 from odoo import models, fields, api, exceptions
-from datetime import datetime
 
 class Patient(models.Model):
     _name = 'hms.patient'
@@ -34,7 +33,7 @@ class Patient(models.Model):
         ('serious', 'Serious')
     ])
     email = fields.Char(string='Email', required=True, unique=True)
-    history_ids = fields.One2many('hms.patient.history', 'patient_id', string='History')
+    history_ids = fields.One2many('patient.history', 'patient_id', string='History')
 
     @api.onchange('department_id')
     def _onchange_department_id(self):
@@ -52,7 +51,7 @@ class Patient(models.Model):
     def _check_cr_ratio(self):
         for patient in self:
             if patient.pcr and not patient.cr_ratio:
-                raise ValidationError("CR Ratio field is mandatory when PCR is checked.")
+                raise exceptions.ValidationError("CR Ratio field is mandatory when PCR is checked.")
 
     @api.depends('age')
     def _compute_history_visibility(self):
@@ -61,7 +60,6 @@ class Patient(models.Model):
                 patient.history = False
             else:
                 patient.history = True
-
 
     @api.onchange('age')
     def _onchange_age(self):
@@ -87,5 +85,3 @@ class Patient(models.Model):
                         (today.month, today.day) < (patient.birth_date.month, patient.birth_date.day))
             else:
                 patient.age = False
-
-
