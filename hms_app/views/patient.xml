@@ -7,6 +7,7 @@
                 <tree>
                     <field name="first_name"/>
                     <field name="last_name"/>
+                    <field name="email"/>
                     <field name="age"/>
                     <field name="state"/>
                     <field name="department_id"/>
@@ -23,6 +24,7 @@
                         <group>
                             <field name="first_name"/>
                             <field name="last_name"/>
+                            <field name="email"/>
                             <field name="birth_date"/>
                             <field name="age"/>
                             <field name="blood_type"/>
